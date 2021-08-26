@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopui-service
+  labels:
+    app: angular
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: angular
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shopui-app
+  labels:
+    app: angular
+    component: shopui-app
+spec:
+  containers:
+    - image: deathstroke45/shoppingui:latest
+      name: ui
+      ports:
+        - containerPort: 8080

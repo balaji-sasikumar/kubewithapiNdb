@@ -6,12 +6,15 @@ metadata:
     app: dotnet-aks
 spec:
   ports:
-  - port: 8080
+  - port: 80
     protocol: TCP
     targetPort: 80
   selector:
     app: dotnet-aks
   type: LoadBalancer
+  # env:
+  # - name: ConnectionString:ShoppingDB
+  #   value: "Server=20.75.211.66,1433;Database=ShopDB;User=sa;Password=BALAJI55!@;TrustServerCertificate=True;"
 ---
 # apiVersion: apps/v1 
 # kind: Deployment
@@ -47,7 +50,13 @@ metadata:
     component: netcore-app
 spec:
   containers:
-    - image: deathstroke45/shoppingapi:latest
-      name: webapi
+    - image: deathstroke45/shoppingapi2:latest
+      name: api
       ports:
         - containerPort: 80
+      env: 
+        - name: ConnectionString__ShoppingDB
+          valueFrom:
+            secretKeyRef:
+              name: api
+              key: connection_string
