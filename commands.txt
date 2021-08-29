@@ -1,0 +1,8 @@
+https://fluentd.es.eastus2.azure.elastic-cloud.com:9243
+
+
+loki:
+helm upgrade --install loki grafana/loki-stack  --set grafana.enabled=false,prometheus.enabled=false,prometheus.alertmanager.persistentVolume.enabled=false,prometheus.server.persistentVolume.enabled=false -n prometheus
+
+
+helm install fluentd fluent/fluentd -f values.yaml

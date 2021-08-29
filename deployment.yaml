@@ -51,7 +51,7 @@ metadata:
 spec:
   containers:
     - image: deathstroke45/shoppingapi2:latest
-      name: api
+      name: webapi
       ports:
         - containerPort: 80
       env: 
